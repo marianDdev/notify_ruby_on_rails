@@ -1,0 +1,17 @@
+<%= link_to(mail_template) do %>
+  <%= button_to 'Delete this mail template', mail_template_path(mail_template), method: :delete, class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to 'Edit this mail template', edit_mail_template_path(mail_template), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+  <div class="h-104 rounded overflow-hidden shadow-lg">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">Subject:
+        <%= mail_template.subject %>
+      </div>
+      <p class="text-gray-700 text-base">Message:
+        <%= mail_template.message %>
+      </p>
+      <p class="text-gray-700 text-base">Signature:
+        <%= mail_template.signature %>
+      </p>
+    </div>
+  </div>
+<% end %>
