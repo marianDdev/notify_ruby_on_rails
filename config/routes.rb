@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :manufacturers
+  resources :manufacturers do
+    collection do
+      post :import
+    end
+  end
   resources :mail_templates
   resources :notifications
   

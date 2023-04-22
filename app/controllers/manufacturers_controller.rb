@@ -1,49 +1,60 @@
 class ManufacturersController < ApplicationController
+  require 'csv'
   before_action :set_manufacturer, only: %i[ show edit update destroy ]
 
-  # GET /manufacturers or /manufacturers.json
   def index
     @manufacturers = Manufacturer.all
   end
 
-  # GET /manufacturers/1 or /manufacturers/1.json
   def show
   end
 
-  # GET /manufacturers/new
   def new
-    @manufacturer = Manufacturer.new
+    @manufacturers = Manufacturer.new
   end
 
-  # GET /manufacturers/1/edit
   def edit
   end
 
-  # POST /manufacturers or /manufacturers.json
+  def import
+    file = params[:file]
+    #return redirect_to manufacturers_path, notice: 'Only CSV please' unless file.content_type == 'text/csv'
+
+     opened_file = File.open(file)
+    options = { headers: true, col_sep: ';' }
+    CSV.foreach(opened_file, **options) do |row|
+      manufacturer_hash = {}
+      manufacturer_hash[:email] = row['email']
+      manufacturer_hash[:name] = row['name']
+      manufacturer_hash[:city] = row['city']
+      manufacturer_hash[:address] = row['address']
+      manufacturer_hash[:phone] = row['phone']
+      manufacturer_hash[:website] = row['website']
+
+      Manufacturer.find_or_create_by!(manufacturer_hash)
+    end
+
+    redirect_to manufacturers_path, notice: 'Manufacturers imported!'
+  end
+
   def create
-    @manufacturer = Manufacturer.create!(manufacturer_params)
-    
-    respond_to do |format|
-      if @manufacturer.save
-        ManufacturerMailer.with(manufacturer: @manufacturer).campaign_email.deliver_now
-        format.html { redirect_to manufacturer_url(@manufacturer), notice: "Manufacturer was successfully created." }
-        format.json { render :show, status: :ok, location: @manufacturer }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @manufacturer.errors, status: :unprocessable_entity }
-      end
+    @manufacturers = Manufacturer.new(params[:manufacturers])
+
+    if @manufacturers.save
+      redirect_to manufacturers_path
+    else
+      render new
     end
   end
 
-  # PATCH/PUT /manufacturers/1 or /manufacturers/1.json
   def update
     respond_to do |format|
       if @manufacturer.update(manufacturer_params)
         format.html { redirect_to manufacturer_url(@manufacturer), notice: "Manufacturer was successfully updated." }
-        format.json { render :show, status: :ok, location: @manufacturer }
+        
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @manufacturer.errors, status: :unprocessable_entity }
+        
       end
     end
   end
@@ -54,7 +65,7 @@ class ManufacturersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to manufacturers_url, notice: "Manufacturer was successfully destroyed." }
-      format.json { head :no_content }
+      
     end
   end
 
