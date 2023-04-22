@@ -23,7 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_21_204323) do
   end
 
   create_table "manufacturers", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "address"
+    t.string "phone"
     t.string "email"
+    t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
