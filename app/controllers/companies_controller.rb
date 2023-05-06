@@ -1,4 +1,4 @@
-class CompanysController < ApplicationController
+class CompaniesController < ApplicationController
   require 'csv'
   before_action :set_company, only: %i[ show edit update destroy ]
 
