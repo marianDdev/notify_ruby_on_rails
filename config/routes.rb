@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  resources :manufacturers do
+  resources :pages
+  resources :users
+  resources :mail_templates
+  resources :notifications
+  
+  resources :companies do
     collection do
       post :import
     end
   end
-  resources :mail_templates
-  resources :notifications
   
-  root "mail_templates#index"
+  root "pages#home"
 end

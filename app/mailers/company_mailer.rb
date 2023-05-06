@@ -1,8 +1,8 @@
-class ManufacturerMailer < ApplicationMailer
+class CompanyMailer < ApplicationMailer
     def campaign_email
-        @manufacturer = params[:manufacturer]
+        @company = params[:company]
         mail(
-            to: @manufacturer.email,
+            to: @company.email,
             subject: "welcome to CezAgora",
             template_name: 'campaign_email'
         )
