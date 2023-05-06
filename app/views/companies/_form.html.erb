@@ -1,0 +1,44 @@
+<%= form_with(model: company) do |form| %>
+  <div class: "mb-6">
+    <%= form.label "Name", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.text_field :name, class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" %>
+  </div>
+  <div class: "mb-6">
+    <%= form.label for="password" class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.text_field :city, class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" %>
+  </div>
+  <div class: "mb-6">
+    <%= form.label for="repeat-password" class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+    <%= form.text_field type="password" id="repeat-password" class: "shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+  </div>
+  <div class: "flex items-start mb-6">
+    <div class: "flex items-center h-5">
+      <%= form.text_field id="terms" type="checkbox" value="" class: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required>
+    </div>
+    <%= form.label for="terms" class: "ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class: "text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></%= form.label>
+  </div>
+  <button type="submit" class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register new account</button>
+<% end %>
+
+    <%= form_with(model: company, class: "contents") do |form| %>
+      <% if company.errors.any? %>
+        <div id="error_explanation" class: "bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+          <h2><%= pluralize(company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+          <ul>
+            <% company.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class: "my-5">
+        <%= form.%= form.label :email %>
+        <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+
+      <div class: "inline">
+        <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      </div>
+    <% end %>
