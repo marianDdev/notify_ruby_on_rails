@@ -38,15 +38,13 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'mail.google.com',
-    user_name:            ENV['GMAIL_USERNAME'],
-    password:             ENV['GMAIL_PASSWORD'],
-    authentication:       'plain',
-    enable_starttls_auto: true,
-    open_timeout:         5,
-    read_timeout:         5 }
+    :user_name => 'ab2bf7b44d104d',
+    :password => 'dfe0d6ac37ba9d',
+    :address => 'sandbox.smtp.mailtrap.io',
+    :domain => 'sandbox.smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
 
 
   # Print deprecation notices to the Rails logger.

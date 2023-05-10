@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Avo::Engine, at: Avo.configuration.root_path
   resources :pages
   resources :users
   resources :mail_templates
